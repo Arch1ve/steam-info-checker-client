@@ -1,6 +1,6 @@
 import { ModalProps, styled } from "@mui/material";
 import {Modal as MuiModal} from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 
 
 const ModalContainer = styled("div")({
@@ -9,12 +9,10 @@ const ModalContainer = styled("div")({
     background: "white",
 })
 
-export const Modal: FC<ModalProps> = ({children, open, ...props }) => {
-
-    const [isOpen, setIsOpen] = useState(open)
+export const Modal: FC<ModalProps> = ({children, ...props }) => {
 
     return (
-        <MuiModal closeAfterTransition disableEnforceFocus open={isOpen}  {...props} sx={{display: "flex", alignItems: "center", justifyContent: "center"}} > 
+        <MuiModal closeAfterTransition disableEnforceFocus {...props} sx={{display: "flex", alignItems: "center", justifyContent: "center"}} > 
             <ModalContainer>
                 {children}
             </ModalContainer>
