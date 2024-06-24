@@ -19,4 +19,4 @@ jobs:
         echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.HOST }} > ~/.ssh/known_hosts
     - name: Deploy using ssh
-      run: ssh ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd client/ && ls && exit"
+      run: ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd client/ && ls && exit"
