@@ -11,11 +11,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Test
-      uses: webfactory/ssh-agent@v0.3.0
-      with:
-        ssh-private-key: ${{ secrets.PRIVATE_KEY }}
     - name: Deploy using ssh
-      run: ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd client/ && ls && exit"
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/client/steam-info-checker-client
+          git pull
+          git status
+          npm install
+          npm run build
+          pm2 restart server
