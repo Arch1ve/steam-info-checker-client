@@ -13,7 +13,4 @@ jobs:
 
     steps:
     - name: Deploy using ssh
-      run: |
-        ssh root@31.128.40.203
-        Temikadza_2002
-        ls
+      run: sshpass -p Temikadza_2002 ssh root@31.128.40.203
