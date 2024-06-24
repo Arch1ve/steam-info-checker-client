@@ -13,6 +13,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: Test
+      run: |
+        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ${{ secrets.PRIVATE_KEY }}
+        ls
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
@@ -22,7 +26,3 @@ jobs:
         script: |
           whoami
           ls -al
-    - name: Test
-      run: |
-        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ${{ secrets.PRIVATE_KEY }}
-        ls
