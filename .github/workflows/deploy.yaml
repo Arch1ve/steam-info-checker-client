@@ -13,10 +13,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Install keys
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.HOST }} > ~/.ssh/known_hosts
+    - name: Test
+      uses: webfactory/ssh-agent@v0.3.0
+      with:
+        ssh-private-key: ${{ secrets.PRIVATE_KEY }}
     - name: Deploy using ssh
       run: ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd client/ && ls && exit"
