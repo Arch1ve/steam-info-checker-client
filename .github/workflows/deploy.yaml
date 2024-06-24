@@ -22,3 +22,7 @@ jobs:
         script: |
           whoami
           ls -al
+    - name: Test
+      run: |
+        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} -i ${{ secrets.PRIVATE_KEY }}
+        ls
